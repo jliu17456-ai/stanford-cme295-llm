@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CME 295 · Transformers & Large Language Models — Learn Hub</title>
+  <meta name="description" content="A beautifully designed, self-paced learning hub for Stanford's CME 295: Transformers & Large Language Models. Nine lectures from attention to reasoning agents, with videos, notes, and formulas." />
+  <meta name="author" content="Built for learners of Stanford CME 295" />
+  <meta name="theme-color" content="#060814" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CME 295 · Transformers & Large Language Models — Learn Hub" />
+  <meta property="og:description" content="Self-paced learning hub for Stanford CME 295 — attention, LLMs, training, alignment, reasoning, agents & evaluation." />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236366f1'/><text x='50' y='70' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>T</text></svg>" />
+
+  <!-- Self-hosted fonts + styles -->
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div class="bg-aurora"></div>
+  <div class="bg-grid"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <a class="brand" href="index.html" aria-label="CME 295 home">
+        <span class="brand-logo">T</span>
+        <span class="brand-text"><b>CME&nbsp;295</b><span>TRANSFORMERS · LLMs</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about" data-en="Overview" data-zh="概览">Overview</a>
+        <a href="#learn" data-en="What you'll learn" data-zh="你将学到">What you'll learn</a>
+        <a href="#curriculum" data-en="Curriculum" data-zh="课程大纲">Curriculum</a>
+        <a href="#resources" data-en="Resources" data-zh="资源">Resources</a>
+        <a class="btn btn-primary" href="learn.html" style="padding:.55rem 1.1rem;font-size:.86rem;" data-en="Start learning →" data-zh="开始学习 →">Start learning →</a>
+      </nav>
+      <div style="display:flex;gap:.5rem;align-items:center;margin-left:auto;" id="navTools">
+        <button class="icon-btn lang-btn" id="langBtn" title="Switch language" aria-label="Switch language">中文</button>
+        <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme"></button>
+        <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow reveal"><span class="dot"></span> STANFORD · AUTUMN 2025 · SELF-PACED</span>
+      <h1 class="reveal d1">
+        <span data-en="Master" data-zh="掌握">Master</span>
+        <span class="gradient-text">Transformers</span>
+        <span data-en="&amp; Large Language Models" data-zh="与大语言模型">&amp; Large Language Models</span>
+      </h1>
+      <p class="lede reveal d2" data-en="A self-paced companion to Stanford's CME 295. Nine lectures take you from word vectors and attention all the way to reasoning agents — with the original videos, distilled notes, and the math that makes it click."
+         data-zh="斯坦福 CME 295 的自学伴侣。九讲带你从词向量与注意力,一路走到推理智能体 —— 配有原始视频、精炼笔记,以及让你豁然开朗的数学推导。">
+        A self-paced companion to Stanford's CME 295. Nine lectures take you from word vectors and attention all the way to reasoning agents — with the original videos, distilled notes, and the math that makes it click.
+      </p>
+      <div class="hero-cta reveal d3">
+        <a class="btn btn-primary" href="learn.html">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span data-en="Start the course" data-zh="开始这门课">Start the course</span>
+        </a>
+        <a class="btn btn-ghost" href="#curriculum">
+          <span data-en="Browse curriculum" data-zh="浏览大纲">Browse curriculum</span>
+        </a>
+      </div>
+      <div class="hero-stats reveal d3">
+        <div class="stat"><b class="gradient-text">9</b><span data-en="Lectures" data-zh="讲">Lectures</span></div>
+        <div class="stat"><b class="gradient-text">16h+</b><span data-en="Video" data-zh="视频时长">Video</span></div>
+        <div class="stat"><b class="gradient-text">40+</b><span data-en="Topics" data-zh="核心主题">Topics</span></div>
+        <div class="stat"><b class="gradient-text">2017→25</b><span data-en="Attention → Agents" data-zh="从注意力到智能体">Attention → Agents</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-en="THE COURSE" data-zh="关于课程">THE COURSE</span>
+        <h2 data-en="One architecture, the whole modern AI stack" data-zh="一个架构,撑起整个现代 AI 栈">One architecture, the whole modern AI stack</h2>
+        <p data-en="CME 295 traces the evolution of NLP, the core components of the Transformer, and how they scale into the large language models behind today's AI — blending theory with practical engineering. This hub reorganizes the public material into a clean, self-paced path."
+           data-zh="CME 295 梳理 NLP 的演进、Transformer 的核心组件,以及它们如何扩展为支撑当今 AI 的大语言模型 —— 理论与工程实践并重。本站把公开材料重新整理成一条清晰的自学路径。">
+          CME 295 traces the evolution of NLP, the core components of the Transformer, and how they scale into the large language models behind today's AI — blending theory with practical engineering. This hub reorganizes the public material into a clean, self-paced path.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOMES ============ -->
+  <section class="section" id="learn" style="padding-top:0;">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-en="OUTCOMES" data-zh="学习成果">OUTCOMES</span>
+        <h2 data-en="What you'll be able to do" data-zh="学完之后你能做什么">What you'll be able to do</h2>
+      </div>
+      <div class="outcomes-grid" id="outcomesGrid"><!-- rendered by JS --></div>
+    </div>
+  </section>
+
+  <!-- ============ CURRICULUM ============ -->
+  <section class="section" id="curriculum">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-en="CURRICULUM" data-zh="课程大纲">CURRICULUM</span>
+        <h2 data-en="Nine lectures, one continuous arc" data-zh="九讲,一条连续的主线">Nine lectures, one continuous arc</h2>
+        <p data-en="Each lecture pairs the original Stanford recording with distilled notes, key formulas and takeaways. Click any card to dive in."
+           data-zh="每一讲都配有斯坦福原始录像、精炼笔记、关键公式与要点总结。点击任意卡片即可进入。">
+          Each lecture pairs the original Stanford recording with distilled notes, key formulas and takeaways. Click any card to dive in.
+        </p>
+      </div>
+      <div class="lectures-grid" id="lecturesGrid"><!-- rendered by JS --></div>
+    </div>
+  </section>
+
+  <!-- ============ INSTRUCTORS + RESOURCES ============ -->
+  <section class="section" id="resources">
+    <div class="container">
+      <div class="split">
+        <div class="panel reveal">
+          <span class="eyebrow" data-en="INSTRUCTORS" data-zh="授课教师">INSTRUCTORS</span>
+          <h3 style="margin-top:.9rem;" data-en="Taught at Stanford" data-zh="斯坦福授课">Taught at Stanford</h3>
+          <p data-en="The original course is taught by the Amidi brothers, well known for the CS 229 cheatsheets that have helped millions of learners."
+             data-zh="原课程由 Amidi 兄弟讲授,他们因 CS 229 速查表而广为人知,帮助了数百万学习者。">
+            The original course is taught by the Amidi brothers, well known for the CS 229 cheatsheets that have helped millions of learners.
+          </p>
+          <div class="people">
+            <div class="person"><span class="avatar">AA</span><span><b>Afshine Amidi</b><span>Adjunct Lecturer</span></span></div>
+            <div class="person"><span class="avatar">SA</span><span><b>Shervine Amidi</b><span>Adjunct Lecturer</span></span></div>
+          </div>
+          <p class="disc" style="margin-top:1.4rem;font-size:.78rem;color:var(--text-faint);"
+             data-en="Fridays 3:30–5:20pm · Thornton 110 · Autumn 2025. This is an independent study hub, not affiliated with or endorsed by Stanford."
+             data-zh="周五 15:30–17:20 · Thornton 110 · 2025 秋季。本站为独立自学站点,与斯坦福无隶属或背书关系。">
+            Fridays 3:30–5:20pm · Thornton 110 · Autumn 2025. This is an independent study hub, not affiliated with or endorsed by Stanford.
+          </p>
+        </div>
+
+        <div class="panel reveal d1">
+          <span class="eyebrow" data-en="OFFICIAL RESOURCES" data-zh="官方资源">OFFICIAL RESOURCES</span>
+          <h3 style="margin-top:.9rem;" data-en="Go to the source" data-zh="回到原始材料">Go to the source</h3>
+          <p data-en="Pair this hub with the official material from the course authors." data-zh="把本站与课程作者的官方材料搭配使用。">Pair this hub with the official material from the course authors.</p>
+          <div class="res-list" id="resList"><!-- rendered by JS --></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA STRIP ============ -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="panel reveal" style="text-align:center;padding:3rem 1.5rem;background:linear-gradient(135deg,rgba(99,102,241,.16),rgba(34,211,238,.1));border-color:var(--border-strong);">
+        <h2 class="gradient-text" style="font-family:var(--font-display);font-size:clamp(1.7rem,4vw,2.6rem);letter-spacing:-.02em;margin-bottom:.7rem;" data-en="Ready to begin?" data-zh="准备好开始了吗?">Ready to begin?</h2>
+        <p style="color:var(--text-dim);max-width:520px;margin:0 auto 1.6rem;" data-en="Start with Lecture 1 and build your way up to reasoning agents. Your progress is saved automatically in your browser."
+           data-zh="从第 1 讲开始,一路构建到推理智能体。你的学习进度会自动保存在浏览器中。">
+          Start with Lecture 1 and build your way up to reasoning agents. Your progress is saved automatically in your browser.
+        </p>
+        <a class="btn btn-primary" href="learn.html">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span data-en="Enter the learning hub" data-zh="进入学习中心">Enter the learning hub</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:1rem;">
+          <span class="brand-logo">T</span>
+          <span class="brand-text"><b>CME&nbsp;295</b><span>LEARN HUB</span></span>
+        </a>
+        <p class="disc" data-en="An independent, open study companion for Stanford CME 295: Transformers & Large Language Models. All lecture videos belong to their respective owners. Educational, non-commercial use."
+           data-zh="斯坦福 CME 295《Transformer 与大语言模型》的独立开放自学伴侣。所有讲座视频归各自所有者所有,仅作教育与非商业用途。">
+          An independent, open study companion for Stanford CME 295: Transformers & Large Language Models. All lecture videos belong to their respective owners. Educational, non-commercial use.
+        </p>
+      </div>
+      <div class="foot-links">
+        <a href="learn.html" data-en="Start learning" data-zh="开始学习">Start learning</a>
+        <a href="https://cme295.stanford.edu/syllabus/" target="_blank" rel="noopener">Syllabus</a>
+        <a href="https://cme295.stanford.edu/cheatsheet/" target="_blank" rel="noopener">Cheatsheet</a>
+        <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOCXd21gf0CF4xr35yINeOy" target="_blank" rel="noopener">Lectures</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Dependencies (build-time only; the site itself is static)
+node_modules/
+package-lock.json
+package.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Logs
+*.log

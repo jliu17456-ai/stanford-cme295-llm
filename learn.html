@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn · CME 295 — Transformers & Large Language Models</title>
+  <meta name="description" content="Self-paced learning interface for Stanford CME 295 — lecture videos, distilled notes, key formulas and takeaways across nine lectures." />
+  <meta name="theme-color" content="#060814" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236366f1'/><text x='50' y='70' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>T</text></svg>" />
+
+  <link rel="stylesheet" href="css/fonts.css" />
+  <link rel="stylesheet" href="css/main.css" />
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] },
+      options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] },
+      svg: { fontCache: "global" },
+      startup: { typeset: false },
+    };
+  </script>
+  <script async src="vendor/mathjax/tex-svg.js"></script>
+</head>
+<body>
+  <div class="bg-aurora"></div>
+  <div class="bg-grid"></div>
+
+  <!-- NAV -->
+  <header class="nav scrolled" id="nav">
+    <div class="container">
+      <a class="brand" href="index.html" aria-label="CME 295 home">
+        <span class="brand-logo">T</span>
+        <span class="brand-text"><b>CME&nbsp;295</b><span>LEARN HUB</span></span>
+      </a>
+      <div style="display:flex;gap:.5rem;align-items:center;margin-left:auto;">
+        <a class="btn btn-ghost" href="index.html" style="padding:.5rem 1rem;font-size:.85rem;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          <span data-en="Home" data-zh="首页">Home</span>
+        </a>
+        <button class="icon-btn lang-btn" id="langBtn" title="Switch language">中文</button>
+        <button class="icon-btn" id="themeBtn" title="Toggle theme"></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE BAR -->
+  <div class="mobile-bar">
+    <button class="menu-btn" id="sidebarToggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      <span data-en="Lectures" data-zh="课程目录">Lectures</span>
+    </button>
+    <span class="mb-title" id="mobileTitle"></span>
+  </div>
+
+  <div class="sidebar-backdrop" id="backdrop"></div>
+
+  <!-- SHELL -->
+  <div class="learn-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input type="search" id="search" placeholder="Search topics…" data-en-ph="Search topics…" data-zh-ph="搜索主题…" aria-label="Search" />
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span data-en="Your progress" data-zh="学习进度">Your progress</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <nav id="navTree" aria-label="Course navigation"><!-- rendered by JS --></nav>
+
+      <div class="sidebar-foot">
+        <button class="btn btn-ghost" id="resetProgress" style="width:100%;justify-content:center;font-size:.82rem;padding:.6rem;">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          <span data-en="Reset progress" data-zh="重置进度">Reset progress</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="content" id="content"><!-- rendered by JS --></main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/learn.js"></script>
+</body>
+</html>
