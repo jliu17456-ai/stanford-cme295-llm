@@ -96,7 +96,7 @@
     C.lectures.forEach((l) => {
       items.push({ label: l.title, labelZh: l.titleZh, sub: "Lecture " + l.num, hash: "#" + l.slug, accent: l.accent, lead: l.num });
       l.topics.forEach((tp, i) =>
-        items.push({ label: tp.name, labelZh: tp.summaryZh || tp.name, sub: "L" + l.num + " · " + l.title, hash: "#" + l.slug + "/" + i, accent: l.accent, lead: "·" }));
+        items.push({ label: tp.name, labelZh: tp.nameZh || tp.name, sub: "L" + l.num + " · " + l.title, hash: "#" + l.slug + "/" + i, accent: l.accent, lead: "·" }));
     });
 
     // trigger button in the nav

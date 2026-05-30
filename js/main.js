@@ -36,7 +36,7 @@
       <div class="outcome reveal d${(i % 3) + 1}">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${o.icon}"/></svg></div>
         <h3>${t(o.title, o.titleZh)}</h3>
-        <p>${o.text}</p>
+        <p>${t(o.text, o.textZh || o.text)}</p>
       </div>`).join("");
   }
 
@@ -56,7 +56,7 @@
           </span>
         </div>
         <h3>${t(l.title, l.titleZh)}</h3>
-        <p class="tagline">${l.tagline}</p>
+        <p class="tagline">${t(l.tagline, l.taglineZh || l.tagline)}</p>
         <div class="lc-tags">${(TAGS[l.id] || []).map((x) => `<span class="lc-tag">${x}</span>`).join("")}</div>
         <span class="lc-go">${t("Open lecture", "进入本讲")} <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>`).join("");

@@ -51,7 +51,7 @@
       const isActive = l.slug === cur;
       const isDone = done.has(l.id);
       const subs = l.topics.map((tp, i) =>
-        `<button class="nav-sub" data-slug="${l.slug}" data-topic="${i}">${t(tp.name, tp.summaryZh || tp.name)}</button>`
+        `<button class="nav-sub" data-slug="${l.slug}" data-topic="${i}">${t(tp.name, tp.nameZh || tp.name)}</button>`
       ).join("");
       return `
       <div class="nav-group accent-${l.accent} ${isActive ? "open" : ""}" data-slug="${l.slug}">
@@ -127,15 +127,15 @@
       <section class="topic" id="topic-${i}">
         <div class="topic-head">
           <span class="ti">${String(i + 1).padStart(2, "0")}</span>
-          <h2>${t(tp.name, tp.name)}</h2>
+          <h2>${t(tp.name, tp.nameZh || tp.name)}</h2>
         </div>
-        <div class="topic-body">${tp.body}</div>
+        <div class="topic-body">${t(tp.body, tp.bodyZh || tp.body)}</div>
       </section>`).join("");
 
     const takeawaysHtml = `
       <div class="takeaways">
         <h3>${IBulb}<span>${t("Key takeaways", "要点总结")}</span></h3>
-        <ul>${l.takeaways.map((x) => `<li>${x}</li>`).join("")}</ul>
+        <ul>${(window.CME.getLang() === "zh" && l.takeawaysZh ? l.takeawaysZh : l.takeaways).map((x) => `<li>${x}</li>`).join("")}</ul>
       </div>`;
 
     const refsHtml = (l.refs && l.refs.length) ? `
@@ -149,7 +149,7 @@
         <header class="lec-head">
           <div class="crumbs">${C.meta.code} / <b>${t("LECTURE", "第")} ${l.num}${t("", " 讲")}</b></div>
           <h1>${t(l.title, l.titleZh)}</h1>
-          <p class="lec-tagline">${l.tagline}</p>
+          <p class="lec-tagline">${t(l.tagline, l.taglineZh || l.tagline)}</p>
           <div class="lec-meta-row">
             <span>${ICal} ${l.date}</span>
             <span>${ITime} ${l.duration}</span>
