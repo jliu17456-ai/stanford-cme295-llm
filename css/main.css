@@ -796,13 +796,20 @@ ul { list-style: none; padding: 0; }
   font-size: 0.95rem;
 }
 .topic-body blockquote strong { color: var(--accent, var(--grad-3)); }
-/* MathJax display blocks */
-.topic-body mjx-container[display="true"] {
+/* MathJax: the global `svg { display:block }` reset breaks inline math by
+   forcing each formula onto its own line — restore inline flow here. */
+mjx-container svg { display: inline-block; max-width: none; }
+mjx-container { line-height: 0; }
+.topic-body mjx-container[display="true"],
+.overview-box mjx-container[display="true"] {
+  display: block;
+  text-align: center;
   overflow-x: auto; overflow-y: hidden;
-  padding: 0.9rem 0.4rem; margin: 0.3rem 0 1.2rem;
+  padding: 0.9rem 0.4rem; margin: 0.4rem 0 1.2rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+  line-height: normal;
 }
 
 /* Takeaways */
