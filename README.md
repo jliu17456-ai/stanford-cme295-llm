@@ -33,10 +33,21 @@ python3 -m http.server 8080
 # open http://localhost:8080
 ```
 
-## 📦 Deployment
+## 📦 Deployment (GitHub Pages)
 
-Pushed commits are published to **GitHub Pages** automatically via
-`.github/workflows/deploy.yml` (the workflow enables Pages on first run).
+The site is plain static files at the repo root, so the simplest publish path
+is **Deploy from a branch** — no build step, no workflow needed:
+
+1. **(Free plan only)** Make the repo public: **Settings → General → Danger Zone
+   → Change visibility → Public**. GitHub Pages is free for public repos; private
+   repos need GitHub Pro/Team/Enterprise.
+2. **Settings → Pages → Build and deployment → Source: _Deploy from a branch_.**
+3. Choose branch **`claude/upbeat-clarke-dHMeR`** and folder **`/ (root)`**, then **Save**.
+4. Wait ~1 minute. The site goes live at:
+
+   **https://jliu17456-ai.github.io/stanford-cme295-llm/**
+
+That's it — every future push to the branch republishes automatically.
 
 ## 📚 Official resources
 
