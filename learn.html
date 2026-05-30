@@ -25,6 +25,7 @@
 <body>
   <div class="bg-aurora"></div>
   <div class="bg-grid"></div>
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
   <!-- NAV -->
   <header class="nav scrolled" id="nav">
@@ -78,6 +79,12 @@
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
           <span data-en="Reset progress" data-zh="重置进度">Reset progress</span>
         </button>
+        <div class="kbd-hints">
+          <kbd>←</kbd><kbd>→</kbd>
+          <span style="font-size:.68rem;color:var(--text-faint);align-self:center;" data-en="switch · " data-zh="切换 · ">switch · </span>
+          <kbd>/</kbd>
+          <span style="font-size:.68rem;color:var(--text-faint);align-self:center;" data-en="search" data-zh="搜索">search</span>
+        </div>
       </div>
     </aside>
 

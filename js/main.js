@@ -80,6 +80,87 @@
       </a>`).join("");
   }
 
+  /* ---------- Animated hero: a drifting token / attention network ---------- */
+  function initHeroCanvas() {
+    const canvas = document.getElementById("heroCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const palette = ["#818cf8", "#a78bfa", "#22d3ee", "#38bdf8"];
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let w, h, dpr, nodes, raf;
+    const mouse = { x: -999, y: -999 };
+    const LINK = 150;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = rect.width; h = rect.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(72, Math.max(26, Math.round((w * h) / 17000)));
+      nodes = Array.from({ length: count }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
+        r: Math.random() * 1.8 + 1.1,
+        c: palette[(Math.random() * palette.length) | 0],
+      }));
+    }
+
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > w) a.vx *= -1;
+        if (a.y < 0 || a.y > h) a.vy *= -1;
+        // links between nodes
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < LINK) {
+            ctx.strokeStyle = a.c;
+            ctx.globalAlpha = (1 - d / LINK) * 0.16;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+        // link to cursor (attention beam)
+        const mdx = a.x - mouse.x, mdy = a.y - mouse.y;
+        const md = Math.hypot(mdx, mdy);
+        if (md < LINK * 1.5) {
+          ctx.strokeStyle = a.c;
+          ctx.globalAlpha = (1 - md / (LINK * 1.5)) * 0.4;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+        }
+        // node
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle = a.c;
+        ctx.shadowColor = a.c; ctx.shadowBlur = 8;
+        ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      ctx.globalAlpha = 1;
+      if (!reduce) raf = requestAnimationFrame(frame);
+    }
+
+    resize();
+    frame(); // draws at least one frame (static if reduced motion)
+    window.addEventListener("resize", () => { cancelAnimationFrame(raf); resize(); if (!reduce) frame(); });
+    if (!reduce) {
+      window.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
+      });
+      window.addEventListener("mouseleave", () => { mouse.x = -999; mouse.y = -999; });
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); }
+      });
+    }
+  }
+
   function renderAll() {
     renderOutcomes();
     renderLectures();
@@ -87,7 +168,8 @@
     if (window.CME.observeReveals) window.CME.observeReveals();
   }
 
-  if (document.readyState !== "loading") renderAll();
-  else document.addEventListener("DOMContentLoaded", renderAll);
-  document.addEventListener("langchange", renderAll);
+  function boot() { renderAll(); initHeroCanvas(); }
+  if (document.readyState !== "loading") boot();
+  else document.addEventListener("DOMContentLoaded", boot);
+  document.addEventListener("langchange", renderAll); // re-render text only; canvas persists
 })();

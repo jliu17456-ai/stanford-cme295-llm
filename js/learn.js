@@ -206,6 +206,7 @@
         window.scrollTo({ top: 0, behavior: "auto" });
         const c = document.querySelector(".content"); if (c) c.scrollTop = 0;
       }
+      if (window.__updateRead) window.__updateRead();
     });
 
     setupScrollSpy(l);
@@ -280,6 +281,33 @@
       const b = $("completeBtn");
       if (b) { b.classList.remove("done"); b.querySelector("span").textContent = t("Mark as complete", "标记为已完成"); }
     });
+
+    // reading progress bar
+    const rp = $("readProgress");
+    function updateRead() {
+      if (!rp) return;
+      const st = window.scrollY || document.documentElement.scrollTop || 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      rp.style.width = (max > 0 ? Math.min(100, (st / max) * 100) : 0) + "%";
+    }
+    window.addEventListener("scroll", updateRead, { passive: true });
+    window.addEventListener("resize", updateRead);
+    updateRead();
+
+    // keyboard navigation: ←/→ between lectures, "/" focuses search, Esc closes
+    document.addEventListener("keydown", (e) => {
+      const el = e.target;
+      const typing = /^(input|textarea|select)$/i.test(el.tagName) || el.isContentEditable;
+      if (e.key === "/" && !typing) { e.preventDefault(); const s = $("search"); if (s) s.focus(); return; }
+      if (typing) { if (e.key === "Escape") el.blur(); return; }
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const l = lectureBySlug(parseHash().slug);
+      const i = L.indexOf(l);
+      if (e.key === "ArrowRight" && L[i + 1]) { location.hash = L[i + 1].slug; }
+      else if (e.key === "ArrowLeft" && L[i - 1]) { location.hash = L[i - 1].slug; }
+      else if (e.key === "Escape") closeSidebarMobile();
+    });
+    window.__updateRead = updateRead;
 
     // re-render on language switch
     document.addEventListener("langchange", () => {
