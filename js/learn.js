@@ -157,9 +157,14 @@
           </div>
         </header>
 
-        <div class="video-frame">
-          <iframe src="https://www.youtube-nocookie.com/embed/${l.videoId}" title="${l.title}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <div class="video-frame" id="videoFrame">
+          <button class="yt-facade" id="ytFacade" type="button" aria-label="${t("Play lecture video", "播放讲座视频")}">
+            <img class="yt-thumb" id="ytThumb" src="https://i.ytimg.com/vi/${l.videoId}/maxresdefault.jpg" alt="" loading="lazy" />
+            <span class="yt-scrim"></span>
+            <span class="yt-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
         </div>
+        <a class="yt-link" href="https://www.youtube.com/watch?v=${l.videoId}" target="_blank" rel="noopener">${t("Watch on YouTube", "在 YouTube 上观看")} ${IExt}</a>
 
         <div class="overview-box">
           <div class="ob-label">${t("Overview", "本讲概览")}</div>
@@ -200,6 +205,20 @@
       const on = done.has(l.id);
       b.classList.toggle("done", on);
       b.querySelector("span").textContent = on ? t("Completed", "已完成") : t("Mark as complete", "标记为已完成");
+    });
+
+    // video facade: sharp thumbnail -> load player on click (fast + graceful)
+    const thumb = $("ytThumb");
+    if (thumb) thumb.addEventListener("error", function () {
+      this.onerror = null; this.src = "https://i.ytimg.com/vi/" + l.videoId + "/hqdefault.jpg";
+    }, { once: true });
+    const facade = $("ytFacade");
+    if (facade) facade.addEventListener("click", () => {
+      const f = $("videoFrame");
+      if (!f) return;
+      f.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + l.videoId +
+        '?autoplay=1&rel=0" title="' + t(l.title, l.titleZh) +
+        '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
     });
 
     // mobile title
