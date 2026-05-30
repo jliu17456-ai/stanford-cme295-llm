@@ -831,6 +831,28 @@ mjx-container { line-height: 0; }
   line-height: normal;
 }
 
+/* ---------- Handbook: long-form reading rhythm (scoped, won't touch lecture pages) ---------- */
+.handbook .lec { max-width: 50rem; }
+.handbook .topic { margin-bottom: 2.6rem; }
+.handbook .topic-body { font-size: 1.04rem; }
+.handbook .topic-body p { line-height: 1.92; margin-bottom: 1.15rem; color: var(--text-dim); }
+.handbook .topic-body ul li, .handbook .topic-body ol li { line-height: 1.85; margin-bottom: 0.7rem; }
+/* the very first paragraph of a chapter sets the scene — give it room and presence */
+.handbook .topic:first-of-type .topic-body > p:first-child {
+  font-size: 1.24rem; line-height: 1.8; color: var(--text); font-weight: 450; margin-bottom: 1.45rem;
+}
+.handbook .topic:first-of-type .topic-body > p:first-child strong { color: var(--text); }
+/* blockquote = the one-line insight / 金句; make it a real visual beat */
+.handbook .topic-body blockquote {
+  border-left: 3px solid #10b981;
+  background: color-mix(in srgb, #10b981 9%, var(--surface));
+  padding: 1.05rem 1.35rem; margin: 1.7rem 0; border-radius: 0 14px 14px 0;
+  font-size: 1.09rem; line-height: 1.75; color: var(--text); font-weight: 450;
+}
+.handbook .topic-body blockquote strong { color: #34d399; }
+/* a little more air around the centered formula cards */
+.handbook .topic-body mjx-container[display="true"] { margin: 1.1rem 0 1.5rem; padding: 1.05rem 0.6rem; }
+
 /* Takeaways */
 .takeaways {
   margin-top: 2rem;
