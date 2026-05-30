@@ -141,7 +141,7 @@
     const refsHtml = (l.refs && l.refs.length) ? `
       <div class="refs">
         <h3>${IBook}<span>${t("Further reading", "延伸阅读")}</span></h3>
-        <ul>${l.refs.map((r) => `<li><a href="${r.u}" target="_blank" rel="noopener">${r.t} ${IExt}</a></li>`).join("")}</ul>
+        <ul>${l.refs.map((r) => `<li><a href="${r.u}" target="_blank" rel="noopener">${t(r.t, r.tZh || r.t)} ${IExt}</a></li>`).join("")}</ul>
       </div>` : "";
 
     content.innerHTML = `
@@ -151,7 +151,7 @@
           <h1>${t(l.title, l.titleZh)}</h1>
           <p class="lec-tagline">${t(l.tagline, l.taglineZh || l.tagline)}</p>
           <div class="lec-meta-row">
-            <span>${ICal} ${l.date}</span>
+            <span>${ICal} ${t(l.date, l.dateZh || l.date)}</span>
             <span>${ITime} ${l.duration}</span>
             <span>${l.topics.length} ${t("topics", "个主题")}</span>
           </div>

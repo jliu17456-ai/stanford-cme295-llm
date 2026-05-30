@@ -19,6 +19,17 @@
     8: ["Benchmarks", "LLM-as-judge", "Bias"],
     9: ["Recap", "Trends", "What's next"],
   };
+  const TAGS_ZH = {
+    1: ["注意力", "词嵌入", "RNN · LSTM"],
+    2: ["RoPE", "GQA", "FlashAttn", "BERT"],
+    3: ["MoE", "采样", "思维链"],
+    4: ["预训练", "量化", "LoRA"],
+    5: ["RLHF", "PPO", "DPO"],
+    6: ["推理", "GRPO", "测试期算力"],
+    7: ["RAG", "智能体", "ReAct"],
+    8: ["基准测试", "LLM 裁判", "偏差"],
+    9: ["回顾", "趋势", "下一步"],
+  };
 
   const RES_ICONS = {
     syllabus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
@@ -57,7 +68,7 @@
         </div>
         <h3>${t(l.title, l.titleZh)}</h3>
         <p class="tagline">${t(l.tagline, l.taglineZh || l.tagline)}</p>
-        <div class="lc-tags">${(TAGS[l.id] || []).map((x) => `<span class="lc-tag">${x}</span>`).join("")}</div>
+        <div class="lc-tags">${((window.CME.getLang() === "zh" ? TAGS_ZH[l.id] : TAGS[l.id]) || []).map((x) => `<span class="lc-tag">${x}</span>`).join("")}</div>
         <span class="lc-go">${t("Open lecture", "进入本讲")} <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>`).join("");
   }
