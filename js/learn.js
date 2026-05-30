@@ -111,6 +111,8 @@
   const ITime = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
   const ICal = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
   const IBulb = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>';
+  const IBook = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+  const IExt = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>';
 
   function renderContent() {
     const { slug, topic } = parseHash();
@@ -136,6 +138,12 @@
         <ul>${l.takeaways.map((x) => `<li>${x}</li>`).join("")}</ul>
       </div>`;
 
+    const refsHtml = (l.refs && l.refs.length) ? `
+      <div class="refs">
+        <h3>${IBook}<span>${t("Further reading", "延伸阅读")}</span></h3>
+        <ul>${l.refs.map((r) => `<li><a href="${r.u}" target="_blank" rel="noopener">${r.t} ${IExt}</a></li>`).join("")}</ul>
+      </div>` : "";
+
     content.innerHTML = `
       <div class="content-inner accent-${l.accent}">
         <header class="lec-head">
@@ -160,6 +168,7 @@
 
         ${topicsHtml}
         ${takeawaysHtml}
+        ${refsHtml}
 
         <button class="complete-btn ${isDone ? "done" : ""}" id="completeBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>

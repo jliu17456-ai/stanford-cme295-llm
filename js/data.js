@@ -69,6 +69,11 @@ const COURSE = {
       date: "Sep 26, 2025",
       duration: "1:41:58",
       videoId: "Ub3GoFaUcds",
+      refs: [
+        { t: "Attention Is All You Need (Vaswani et al., 2017)", u: "https://arxiv.org/abs/1706.03762" },
+        { t: "Efficient Estimation of Word Representations — word2vec (Mikolov et al., 2013)", u: "https://arxiv.org/abs/1301.3781" },
+        { t: "The Illustrated Transformer (Jay Alammar)", u: "https://jalammar.github.io/illustrated-transformer/" },
+      ],
       accent: "indigo",
       tagline: "How attention replaced recurrence and rewired NLP.",
       overview:
@@ -131,6 +136,12 @@ const COURSE = {
       date: "Oct 3, 2025",
       duration: "1:47:19",
       videoId: "yT84Y5zCnaA",
+      refs: [
+        { t: "RoFormer: Rotary Position Embedding (Su et al., 2021)", u: "https://arxiv.org/abs/2104.09864" },
+        { t: "FlashAttention (Dao et al., 2022)", u: "https://arxiv.org/abs/2205.14135" },
+        { t: "GQA: Grouped-Query Attention (Ainslie et al., 2023)", u: "https://arxiv.org/abs/2305.13245" },
+        { t: "BERT (Devlin et al., 2018)", u: "https://arxiv.org/abs/1810.04805" },
+      ],
       accent: "violet",
       tagline: "Making attention cheaper, smarter about position, and task-shaped.",
       overview:
@@ -193,6 +204,12 @@ const COURSE = {
       date: "Oct 10, 2025",
       duration: "1:48:44",
       videoId: "Q5baLehv5So",
+      refs: [
+        { t: "Language Models are Few-Shot Learners — GPT-3 (Brown et al., 2020)", u: "https://arxiv.org/abs/2005.14165" },
+        { t: "Chain-of-Thought Prompting (Wei et al., 2022)", u: "https://arxiv.org/abs/2201.11903" },
+        { t: "Self-Consistency Improves CoT Reasoning (Wang et al., 2022)", u: "https://arxiv.org/abs/2203.11171" },
+        { t: "Mixtral of Experts (Jiang et al., 2024)", u: "https://arxiv.org/abs/2401.04088" },
+      ],
       accent: "cyan",
       tagline: "Scale, sparsity, sampling and the art of prompting.",
       overview:
@@ -255,6 +272,11 @@ const COURSE = {
       date: "Oct 17, 2025",
       duration: "1:47:27",
       videoId: "VlA_jt_3Qc4",
+      refs: [
+        { t: "Training Compute-Optimal LLMs — Chinchilla (Hoffmann et al., 2022)", u: "https://arxiv.org/abs/2203.15556" },
+        { t: "LoRA: Low-Rank Adaptation (Hu et al., 2021)", u: "https://arxiv.org/abs/2106.09685" },
+        { t: "QLoRA: Efficient Finetuning of Quantized LLMs (Dettmers et al., 2023)", u: "https://arxiv.org/abs/2305.14314" },
+      ],
       accent: "emerald",
       tagline: "Pretrain, compress, and adapt — efficiently.",
       overview:
@@ -311,6 +333,11 @@ const COURSE = {
       date: "Oct 31, 2025",
       duration: "1:47:42",
       videoId: "PmW_TMQ3l0I",
+      refs: [
+        { t: "Training LMs to follow instructions with human feedback — InstructGPT (Ouyang et al., 2022)", u: "https://arxiv.org/abs/2203.02155" },
+        { t: "Proximal Policy Optimization — PPO (Schulman et al., 2017)", u: "https://arxiv.org/abs/1707.06347" },
+        { t: "Direct Preference Optimization — DPO (Rafailov et al., 2023)", u: "https://arxiv.org/abs/2305.18290" },
+      ],
       accent: "amber",
       tagline: "Teaching models what humans actually prefer.",
       overview:
@@ -367,6 +394,10 @@ const COURSE = {
       date: "Nov 7, 2025",
       duration: "1:47:10",
       videoId: "k5Fh-UgTuCo",
+      refs: [
+        { t: "DeepSeek-R1: Incentivizing Reasoning via RL (DeepSeek-AI, 2025)", u: "https://arxiv.org/abs/2501.12948" },
+        { t: "DeepSeekMath — introduces GRPO (Shao et al., 2024)", u: "https://arxiv.org/abs/2402.03300" },
+      ],
       accent: "rose",
       tagline: "Spending compute to think — RL with verifiable rewards.",
       overview:
@@ -417,6 +448,10 @@ const COURSE = {
       date: "Nov 14, 2025",
       duration: "1:49:23",
       videoId: "h-7S6HNq0Vg",
+      refs: [
+        { t: "Retrieval-Augmented Generation — RAG (Lewis et al., 2020)", u: "https://arxiv.org/abs/2005.11401" },
+        { t: "ReAct: Synergizing Reasoning and Acting (Yao et al., 2022)", u: "https://arxiv.org/abs/2210.03629" },
+      ],
       accent: "sky",
       tagline: "Giving models memory, tools, and the ability to act.",
       overview:
@@ -473,6 +508,10 @@ const COURSE = {
       date: "Nov 21, 2025",
       duration: "1:49:25",
       videoId: "8fNP4N46RRo",
+      refs: [
+        { t: "Judging LLM-as-a-Judge with MT-Bench & Chatbot Arena (Zheng et al., 2023)", u: "https://arxiv.org/abs/2306.05685" },
+        { t: "HELM: Holistic Evaluation of Language Models (Liang et al., 2022)", u: "https://arxiv.org/abs/2211.09110" },
+      ],
       accent: "teal",
       tagline: "How do you measure an open-ended generator?",
       overview:
@@ -523,6 +562,10 @@ const COURSE = {
       date: "Dec 5, 2025",
       duration: "1:51:31",
       videoId: "Q86qzJ1K1Ss",
+      refs: [
+        { t: "A Survey of Large Language Models (Zhao et al., 2023)", u: "https://arxiv.org/abs/2303.18223" },
+        { t: "CME 295 — official VIP cheatsheet", u: "https://cme295.stanford.edu/cheatsheet/" },
+      ],
       accent: "fuchsia",
       tagline: "Where we've been, and where the field is heading.",
       overview:
