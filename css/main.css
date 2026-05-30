@@ -341,6 +341,63 @@ ul { list-style: none; padding: 0; }
 .outcome h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.5rem; }
 .outcome p { font-size: 0.92rem; color: var(--text-dim); }
 
+/* ---------- Interactive attention demo ---------- */
+.attn {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.attn-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible; }
+.attn-sentence {
+  position: relative; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: 0.6rem 0.7rem;
+  justify-content: center; align-items: center;
+  padding: 3.2rem 1.6rem 2.4rem;
+}
+.attn-token {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.4vw, 1.45rem);
+  font-weight: 600;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s var(--ease), background 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+}
+.attn-token:hover { transform: translateY(-2px); }
+.attn-token .bar {
+  position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
+  background: linear-gradient(90deg, var(--grad-2), var(--grad-3));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+.attn-token.is-query {
+  background: linear-gradient(120deg, var(--grad-1), var(--grad-2) 55%, var(--grad-3)) !important;
+  color: #fff;
+  border-color: transparent !important;
+  box-shadow: 0 10px 26px -10px rgba(139, 92, 246, 0.8);
+  transform: translateY(-3px) scale(1.04);
+}
+.attn-token.is-query .bar { opacity: 0; }
+.attn-foot {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  justify-content: center;
+  padding: 0 1.5rem 1.7rem;
+  font-size: 0.86rem; color: var(--text-dim);
+}
+.attn-foot .attn-q { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+.attn-foot strong { font-family: var(--font-display); color: var(--text); padding: 0.1rem 0.5rem; border-radius: 7px; background: var(--surface-2); border: 1px solid var(--border); }
+.attn-foot .attn-tip { width: 100%; text-align: center; font-size: 0.78rem; color: var(--text-faint); margin-top: 0.2rem; }
+
 /* ---------- Curriculum cards ---------- */
 .lectures-grid {
   display: grid;

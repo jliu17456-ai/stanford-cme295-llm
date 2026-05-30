@@ -104,6 +104,29 @@
     </div>
   </section>
 
+  <!-- ============ INTERACTIVE ATTENTION DEMO ============ -->
+  <section class="section" id="demo">
+    <div class="container">
+      <div class="section-head center reveal">
+        <span class="eyebrow" data-en="INTERACTIVE" data-zh="可交互演示">INTERACTIVE</span>
+        <h2 data-en="See self-attention in action" data-zh="亲手感受自注意力">See <span class="gradient-text">self-attention</span> in action</h2>
+        <p data-en="Hover or tap any word to see how strongly it attends to every other word — the single operation at the heart of every Transformer."
+           data-zh="把鼠标移到(或点按)任意一个词,看它对其他每个词的『注意力』有多强 —— 这正是所有 Transformer 的核心运算。">
+          Hover or tap any word to see how strongly it attends to every other word — the single operation at the heart of every Transformer.
+        </p>
+      </div>
+      <div class="attn reveal d1" id="attnDemo">
+        <svg class="attn-svg" id="attnSvg" aria-hidden="true"></svg>
+        <div class="attn-sentence" id="attnSentence"></div>
+        <div class="attn-foot">
+          <span class="attn-q" data-en="Query:" data-zh="查询词:">Query:</span>
+          <strong id="attnQuery">—</strong>
+          <span class="attn-tip" data-en="darker = more attention · line thickness = weight" data-zh="颜色越深 = 注意力越强 · 连线越粗 = 权重越大">darker = more attention · line thickness = weight</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ CURRICULUM ============ -->
   <section class="section" id="curriculum">
     <div class="container">
@@ -192,6 +215,7 @@
 
   <script src="js/data.js"></script>
   <script src="js/common.js"></script>
+  <script src="js/attention.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
