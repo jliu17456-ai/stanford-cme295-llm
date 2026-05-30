@@ -71,6 +71,8 @@
     if (window.MathJax && window.MathJax.typesetPromise) {
       window.MathJax.typesetClear && window.MathJax.typesetClear([node]);
       window.MathJax.typesetPromise([node, $("navTree")]).catch(() => {});
+    } else {
+      setTimeout(() => typeset(node), 180); // MathJax (async, ~2MB) not ready yet — retry
     }
   }
 
