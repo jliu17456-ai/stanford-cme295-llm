@@ -85,6 +85,102 @@
     }
   });
 
+  /* ---------- Command palette (⌘K / Ctrl+K) ---------- */
+  function initCmdK() {
+    if (!window.COURSE || document.getElementById("cmdk")) return;
+    const C = window.COURSE;
+    const onLearn = !!document.getElementById("navTree") || /learn\.html$/.test(location.pathname);
+
+    // build index
+    const items = [];
+    C.lectures.forEach((l) => {
+      items.push({ label: l.title, labelZh: l.titleZh, sub: "Lecture " + l.num, hash: "#" + l.slug, accent: l.accent, lead: l.num });
+      l.topics.forEach((tp, i) =>
+        items.push({ label: tp.name, labelZh: tp.summaryZh || tp.name, sub: "L" + l.num + " · " + l.title, hash: "#" + l.slug + "/" + i, accent: l.accent, lead: "·" }));
+    });
+
+    // trigger button in the nav
+    const themeBtn = document.getElementById("themeBtn");
+    if (themeBtn && themeBtn.parentNode) {
+      const trig = document.createElement("button");
+      trig.className = "icon-btn cmdk-trigger";
+      trig.id = "cmdkTrigger";
+      trig.title = "Search (⌘K)";
+      trig.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><span class="cmdk-kbd">⌘K</span>';
+      themeBtn.parentNode.insertBefore(trig, themeBtn);
+      trig.addEventListener("click", open);
+    }
+
+    // overlay
+    const root = document.createElement("div");
+    root.id = "cmdk"; root.className = "cmdk"; root.hidden = true;
+    root.innerHTML =
+      '<div class="cmdk-backdrop"></div>' +
+      '<div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Search">' +
+        '<div class="cmdk-input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>' +
+        '<input id="cmdkInput" type="text" autocomplete="off" spellcheck="false"></div>' +
+        '<ul class="cmdk-list" id="cmdkList"></ul>' +
+        '<div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd> ' + (getLang() === "zh" ? "选择" : "navigate") + '</span><span><kbd>↵</kbd> ' + (getLang() === "zh" ? "打开" : "open") + '</span><span><kbd>esc</kbd> ' + (getLang() === "zh" ? "关闭" : "close") + '</span></div>' +
+      '</div>';
+    document.body.appendChild(root);
+
+    const input = root.querySelector("#cmdkInput");
+    const list = root.querySelector("#cmdkList");
+    let results = [], sel = 0;
+
+    function render(q) {
+      const lang = getLang();
+      const ql = q.trim().toLowerCase();
+      results = items.filter((it) => !ql || (it.label + " " + it.labelZh + " " + it.sub).toLowerCase().includes(ql)).slice(0, 50);
+      sel = 0;
+      list.innerHTML = results.map((it, i) =>
+        `<li class="cmdk-item accent-${it.accent} ${i === 0 ? "sel" : ""}" data-i="${i}">
+          <span class="cmdk-lead">${it.lead}</span>
+          <span class="cmdk-text"><b>${lang === "zh" ? it.labelZh : it.label}</b><span>${it.sub}</span></span>
+          <svg class="cmdk-go" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </li>`).join("") || `<li class="cmdk-empty">${lang === "zh" ? "没有匹配结果" : "No matches"}</li>`;
+      list.querySelectorAll(".cmdk-item").forEach((li) => {
+        li.addEventListener("mousemove", () => setSel(+li.dataset.i));
+        li.addEventListener("click", () => go(+li.dataset.i));
+      });
+    }
+    function setSel(i) {
+      sel = i;
+      list.querySelectorAll(".cmdk-item").forEach((li, j) => li.classList.toggle("sel", j === i));
+      const el = list.querySelector(".cmdk-item.sel");
+      if (el) el.scrollIntoView({ block: "nearest" });
+    }
+    function go(i) {
+      const it = results[i]; if (!it) return;
+      close();
+      if (onLearn) { location.hash = it.hash; }
+      else { location.href = "learn.html" + it.hash; }
+    }
+    function open() {
+      root.hidden = false;
+      document.body.style.overflow = "hidden";
+      input.value = ""; input.placeholder = getLang() === "zh" ? "搜索讲座与主题…" : "Search lectures & topics…";
+      render("");
+      requestAnimationFrame(() => input.focus());
+    }
+    function close() { root.hidden = true; document.body.style.overflow = ""; }
+
+    input.addEventListener("input", () => render(input.value));
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); setSel(Math.min(sel + 1, results.length - 1)); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); setSel(Math.max(sel - 1, 0)); }
+      else if (e.key === "Enter") { e.preventDefault(); go(sel); }
+      else if (e.key === "Escape") { close(); }
+    });
+    root.querySelector(".cmdk-backdrop").addEventListener("click", close);
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) { e.preventDefault(); root.hidden ? open() : close(); }
+    });
+  }
+
+  ready(initCmdK);
+
   /* ---------- Reveal-on-scroll (works for elements added later too) ---------- */
   const io = "IntersectionObserver" in window
     ? new IntersectionObserver((entries) => {

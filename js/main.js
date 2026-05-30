@@ -168,7 +168,25 @@
     if (window.CME.observeReveals) window.CME.observeReveals();
   }
 
-  function boot() { renderAll(); initHeroCanvas(); }
+  /* ---------- Count-up stats ---------- */
+  function countUp() {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("[data-count]").forEach((el) => {
+      const target = parseInt(el.getAttribute("data-count"), 10);
+      const suffix = el.getAttribute("data-suffix") || "";
+      if (reduce) { el.textContent = target + suffix; return; }
+      const dur = 1100, t0 = performance.now();
+      function step(t) {
+        const p = Math.min(1, (t - t0) / dur);
+        const e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        el.textContent = Math.round(target * e) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function boot() { renderAll(); initHeroCanvas(); countUp(); }
   if (document.readyState !== "loading") boot();
   else document.addEventListener("DOMContentLoaded", boot);
   document.addEventListener("langchange", renderAll); // re-render text only; canvas persists
